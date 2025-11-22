@@ -7,7 +7,7 @@ export default async function webhook(req, res) {
   if (event !== "pull_request") {
     return res.status(200).send("Ignored event");
   }
-
+  // Only handle 'closed' and 'synchronize' actions
   const action = req.body.action;
   if (action !== "closed" && action !== "synchronize") {
     return res.status(200).send("No action needed");

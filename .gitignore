@@ -21,3 +21,6 @@ build/
 # Optional editor files
 .vscode/
 .idea/
+
+# Generated documentation
+docs/
