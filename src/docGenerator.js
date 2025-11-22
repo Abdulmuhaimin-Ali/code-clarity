@@ -35,6 +35,7 @@ export default async function generateDocs(changedFiles) {
   }
 }
 
+// Helper function to call AI service
 async function callAIToGenerateDoc(code, filename) {
   try {
     const prompt = `Generate documentation for the following code file ${filename}: \n\n${code}`;
