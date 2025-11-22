@@ -5,3 +5,5 @@ Previous tests are failing because of a files.map function not found error let's
 okay signed up to ngrok now i have consistent url
 
 forgot to restart node server after fixing bug
+
+I moved the server.js to the correct directory so it's methods could access the .env file
