@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import webhook from "./webhook.js";
+import webhook from "./src/webhook.js";
 
 dotenv.config();
 
