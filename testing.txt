@@ -9,3 +9,5 @@ forgot to restart node server after fixing bug
 I moved the server.js to the correct directory so it's methods could access the .env file
 
 correct the data received name from files to data
+
+testing again after adding logging to my docgeneration file
