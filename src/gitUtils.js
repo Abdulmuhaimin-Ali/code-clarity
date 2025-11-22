@@ -25,7 +25,7 @@ export async function extractChangedFiles({ repo, prNumber }) {
     throw new Error(`Expected array of files, got: ${typeof data}`);
   }
 
-  return files.map((f) => ({
+  return data.map((f) => ({
     filename: f.filename,
     patch: f.patch,
     status: f.status,
