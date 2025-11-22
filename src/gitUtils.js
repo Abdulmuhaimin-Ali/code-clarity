@@ -10,14 +10,14 @@ export async function extractChangedFiles({ repo, prNumber }) {
     },
   });
 
+  const data = await resp.json();
   // Check if it's an error response
   if (!resp.ok) {
     throw new Error(`GitHub API error: ${data.message || resp.statusText}`);
   }
 
-  const files = await resp.json();
+  console.log("Extracted changed files:", data);
 
-  console.log("Extracted changed files:", files);
   // Check if data is actually an array
   if (!Array.isArray(data)) {
     throw new Error(`Expected array of files, got: ${typeof data}`);
