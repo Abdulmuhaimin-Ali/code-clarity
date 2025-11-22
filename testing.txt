@@ -3,3 +3,5 @@ This file is used to test if docs are updated based on merged pull request.
 Previous tests are failing because of a files.map function not found error let's see if they work now
 
 okay signed up to ngrok now i have consistent url
+
+forgot to restart node server after fixing bug
