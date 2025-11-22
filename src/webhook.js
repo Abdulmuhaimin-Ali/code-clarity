@@ -18,10 +18,14 @@ export default async function webhook(req, res) {
     prNumber: req.body.pull_request.number,
   };
 
-  const changedFiles = await extractChangedFiles(repoInfo);
-
   try {
     const changedFiles = await extractChangedFiles(repoInfo);
+
+    // Check if there are any files to process
+    if (changedFiles.length === 0) {
+      return res.status(200).send("No files changed");
+    }
+
     await generateDocs(changedFiles);
     res.status(200).send("Docs updated");
   } catch (error) {
