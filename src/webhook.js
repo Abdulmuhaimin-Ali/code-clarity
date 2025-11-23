@@ -1,7 +1,7 @@
-import generateDocs from "./docGenerator.js";
+import generateDocs from "./services/docGenerator.js";
 import { extractChangedFiles } from "./gitUtils.js";
-import { generateRepositoryOverview } from "./repoOverview.js";
-import { generateArchitectureFromOverview } from "./genArch.js";
+import { generateRepositoryOverview } from "./services/repoOverview.js";
+import { generateArchitectureFromOverview } from "./services/genArch.js";
 
 export default async function webhook(req, res) {
   const event = req.headers["x-github-event"];
