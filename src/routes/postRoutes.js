@@ -17,6 +17,8 @@
 // // Get posts for a specific user
 // router.get("/user/:userId", getPostsByUser);
 
+// testing
+
 // // Delete a post by ID
 // router.delete("/:id", deletePost);
 

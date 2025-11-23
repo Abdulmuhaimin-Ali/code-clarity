@@ -17,6 +17,7 @@
 // // Get sessions for a specific user
 // router.get("/user/:userId", getSessionsByUser);
 
+// testing
 // // Delete a session by ID
 // router.delete("/:id", deleteSession);
 
