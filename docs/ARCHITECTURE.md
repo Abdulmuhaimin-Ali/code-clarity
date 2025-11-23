@@ -3,12 +3,12 @@
 ```mermaid
 graph LR
     subgraph "External Systems"
-    GitRepository[Git Repository (e.g., GitHub)]
+    GitRepository["Git Repository (e.g., GitHub)"]
     end
     subgraph "ai-doc-bot Backend"
     subgraph "API Layer (Express.js)"
-        server[server.js] --> routes[routes/*]
-        routes --> controllers[controllers/*]
+        server[server.js] --> routes["routes/*"]
+        routes --> controllers["controllers/*"]
         webhook[webhook.js]
         GitRepository -- Webhook --> webhook
     end
@@ -19,13 +19,13 @@ graph LR
     end
     subgraph "Data Access Layer (Prisma)"
         prismaClient[prismaClient.js]
-        models[models/*]
+        models["models/*"]
     end
     subgraph "Data Storage"
-        Database[(Database (Prisma-managed))]
+        Database[("Database (Prisma-managed)")]
     end
     subgraph "Documentation Output"
-        Documentation[docs/*]
+        Documentation["docs/*"]
     end
     end
     
