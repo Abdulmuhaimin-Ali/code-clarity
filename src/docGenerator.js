@@ -53,11 +53,23 @@ async function categorizeFile(code, filename) {
    Return ONLY the category name, nothing else.
    `;
 
-    const response = await fetch(process.env.GEMINI_API_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt }),
-    });
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-goog-api-key": process.env.GEMINI_API_KEY,
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [{ text: prompt }],
+            },
+          ],
+        }),
+      }
+    );
 
     const data = await response.json();
     console.log(data);
@@ -73,11 +85,23 @@ async function callAIToGenerateDoc(code, filename) {
   try {
     const prompt = `Generate documentation for the following code file ${filename}: \n\n${code}`;
 
-    const response = await fetch(process.env.GEMINI_API_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt }),
-    });
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-goog-api-key": process.env.GEMINI_API_KEY,
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [{ text: prompt }],
+            },
+          ],
+        }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`AI service responded with status ${response.status}`);
