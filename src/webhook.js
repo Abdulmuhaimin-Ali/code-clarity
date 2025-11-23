@@ -27,23 +27,11 @@ export default async function webhook(req, res) {
     }
     await generateDocs(changedFiles);
 
-    if (shouldGenerateOverview(req.body)) {
-      await generateRepositoryOverview(repoInfo.repo);
-    }
+    await generateRepositoryOverview(repoInfo.repo);
 
     res.status(200).send("Docs updated");
   } catch (error) {
     console.error("Webhook processing failed:", error);
     res.status(500).send("Error processing webhook");
   }
-}
-
-// Helper to decide when to generate overview (avoid doing it too often)
-function shouldGenerateOverview(webhookBody) {
-  // Generate overview on:
-  // - First PR after long time
-  // - Major version changes
-  // - Specific trigger in PR description
-  const prTitle = webhookBody.pull_request.title.toLowerCase();
-  return prTitle.includes("#overview") || prTitle.includes("major update");
 }
