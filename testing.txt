@@ -16,3 +16,5 @@ testing overview Generation again after pulling new changes from main
 
 test if architecture mermaid file gets generated with no errors.
 
+test archgen again 
+
