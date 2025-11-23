@@ -17,6 +17,7 @@ export default async function generateDocs(changedFiles) {
 
     // get category from AI
     const category = await categorizeFile(code, file.filename);
+    console.log(`Categorized ${file.filename} as ${category}`);
 
     const doc = await callAIToGenerateDoc(code, file.filename);
 
@@ -52,35 +53,14 @@ async function categorizeFile(code, filename) {
    Return ONLY the category name, nothing else.
    `;
 
-    const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-goog-api-key": process.env.GEMINI_API_KEY,
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [{ text: prompt }],
-            },
-          ],
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`AI service responded with status ${response.status}`);
-    }
+    const response = await fetch(process.env.GEMINI_API_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt }),
+    });
 
     const data = await response.json();
-
-    if (data.candidates && data.candidates[0]) {
-      return data.candidates[0].content.parts[0].text.trim();
-    } else {
-      throw new Error("Unexpected response format from Gemini");
-    }
+    return data.output.trim().toLowerCase();
   } catch (error) {
     console.error("Error categorizing file:", error);
     return "uncategorized";
