@@ -87,3 +87,8 @@ export async function generateArchitectureFromOverview(repo) {
     console.error("Error generating architecture:", error.message);
   }
 }
+
+// demo
+// demo
+// demo
+// demo
