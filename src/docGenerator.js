@@ -38,19 +38,16 @@ export default async function generateDocs(changedFiles) {
 
 async function categorizeFile(code, filename) {
   try {
-    const prompt = `
+    const prompt = `You must return ONLY a single word from this exact list:
+- business-logic
+- api-routes
+- database
 
-  File: ${filename}
-  code:
-  ${code}
-  
-  Categorize this into one of the following categories:
-   - business-logic
-   - api-routes
-   - database
+File: ${filename}
+Code:
+${code}
 
-   I just want you Return ONLY the category name from the list above, nothing else.
-   `;
+Return ONLY the category word. Do not include any other text, explanation, or punctuation.`;
 
     const response = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
