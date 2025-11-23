@@ -1,5 +1,6 @@
 import generateDocs from "./docGenerator.js";
 import { extractChangedFiles } from "./gitUtils.js";
+import { generateRepositoryOverview } from "./repoOverview.js";
 
 export default async function webhook(req, res) {
   const event = req.headers["x-github-event"];
@@ -20,16 +21,29 @@ export default async function webhook(req, res) {
 
   try {
     const changedFiles = await extractChangedFiles(repoInfo);
-
     // Check if there are any files to process
     if (changedFiles.length === 0) {
       return res.status(200).send("No files changed");
     }
-
     await generateDocs(changedFiles);
+
+    if (shouldGenerateOverview(req.body)) {
+      await generateRepositoryOverview(repoInfo.repo);
+    }
+
     res.status(200).send("Docs updated");
   } catch (error) {
     console.error("Webhook processing failed:", error);
     res.status(500).send("Error processing webhook");
   }
+}
+
+// Helper to decide when to generate overview (avoid doing it too often)
+function shouldGenerateOverview(webhookBody) {
+  // Generate overview on:
+  // - First PR after long time
+  // - Major version changes
+  // - Specific trigger in PR description
+  const prTitle = webhookBody.pull_request.title.toLowerCase();
+  return prTitle.includes("#overview") || prTitle.includes("major update");
 }
