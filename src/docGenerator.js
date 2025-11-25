@@ -114,3 +114,6 @@ async function callAIToGenerateDoc(code, filename) {
     return `# Documentation Generation Failed\n\nError: ${error.message}`;
   }
 }
+
+
+// demo

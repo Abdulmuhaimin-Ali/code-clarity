@@ -21,5 +21,4 @@
 // router.delete("/:id", deleteSession);
 
 // export default router;
-// demo
 
