@@ -10,13 +10,6 @@
 //   });
 // };
 
-// export const getAllUsers = () => {
-//   return prisma.user.findMany({
-//     include: {
-//       posts: true,
-//       sessions: true,
-//     },
-//   });
-// };
+
 
 

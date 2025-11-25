@@ -4,6 +4,5 @@
 //   return prisma.session.create({ data });
 // };
 
-// demo
 
 
